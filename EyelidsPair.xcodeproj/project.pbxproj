@@ -15,6 +15,14 @@
 		B04F7D732BB18536003E7DCE /* EyelidsPairTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F7D722BB18536003E7DCE /* EyelidsPairTests.swift */; };
 		B04F7D7D2BB18536003E7DCE /* EyelidsPairUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F7D7C2BB18536003E7DCE /* EyelidsPairUITests.swift */; };
 		B04F7D7F2BB18536003E7DCE /* EyelidsPairUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F7D7E2BB18536003E7DCE /* EyelidsPairUITestsLaunchTests.swift */; };
+		B04F7D8E2BB2E82B003E7DCE /* GATT.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F7D8D2BB2E82B003E7DCE /* GATT.swift */; };
+		B04F7D8F2BB2E82B003E7DCE /* GATT.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F7D8D2BB2E82B003E7DCE /* GATT.swift */; };
+		B04F7D912BB30D57003E7DCE /* BTMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F7D902BB30D57003E7DCE /* BTMan.swift */; };
+		B04F7D922BB30D57003E7DCE /* BTMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F7D902BB30D57003E7DCE /* BTMan.swift */; };
+		B0B738112BB4B5CE00453E63 /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B738102BB4B5CE00453E63 /* UIApplicationExtension.swift */; };
+		B0B738122BB4B5CE00453E63 /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B738102BB4B5CE00453E63 /* UIApplicationExtension.swift */; };
+		B0B738142BB4B98100453E63 /* PeripheralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B738132BB4B98100453E63 /* PeripheralView.swift */; };
+		B0B738152BB4B98100453E63 /* PeripheralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B738132BB4B98100453E63 /* PeripheralView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +54,12 @@
 		B04F7D782BB18536003E7DCE /* EyelidsPairUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EyelidsPairUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B04F7D7C2BB18536003E7DCE /* EyelidsPairUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyelidsPairUITests.swift; sourceTree = "<group>"; };
 		B04F7D7E2BB18536003E7DCE /* EyelidsPairUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyelidsPairUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B04F7D8B2BB187EF003E7DCE /* EyelidsPair.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EyelidsPair.entitlements; sourceTree = "<group>"; };
+		B04F7D8C2BB18861003E7DCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B04F7D8D2BB2E82B003E7DCE /* GATT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GATT.swift; sourceTree = "<group>"; };
+		B04F7D902BB30D57003E7DCE /* BTMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTMan.swift; sourceTree = "<group>"; };
+		B0B738102BB4B5CE00453E63 /* UIApplicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
+		B0B738132BB4B98100453E63 /* PeripheralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,11 +110,17 @@
 		B04F7D5E2BB18535003E7DCE /* EyelidsPair */ = {
 			isa = PBXGroup;
 			children = (
+				B04F7D8C2BB18861003E7DCE /* Info.plist */,
+				B04F7D8B2BB187EF003E7DCE /* EyelidsPair.entitlements */,
 				B04F7D5F2BB18535003E7DCE /* EyelidsPairApp.swift */,
 				B04F7D612BB18535003E7DCE /* ContentView.swift */,
 				B04F7D632BB18535003E7DCE /* Item.swift */,
 				B04F7D652BB18536003E7DCE /* Assets.xcassets */,
 				B04F7D672BB18536003E7DCE /* Preview Content */,
+				B04F7D8D2BB2E82B003E7DCE /* GATT.swift */,
+				B04F7D902BB30D57003E7DCE /* BTMan.swift */,
+				B0B738102BB4B5CE00453E63 /* UIApplicationExtension.swift */,
+				B0B738132BB4B98100453E63 /* PeripheralView.swift */,
 			);
 			path = EyelidsPair;
 			sourceTree = "<group>";
@@ -260,8 +280,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B738112BB4B5CE00453E63 /* UIApplicationExtension.swift in Sources */,
 				B04F7D622BB18535003E7DCE /* ContentView.swift in Sources */,
+				B04F7D912BB30D57003E7DCE /* BTMan.swift in Sources */,
+				B04F7D8E2BB2E82B003E7DCE /* GATT.swift in Sources */,
 				B04F7D642BB18535003E7DCE /* Item.swift in Sources */,
+				B0B738142BB4B98100453E63 /* PeripheralView.swift in Sources */,
 				B04F7D602BB18535003E7DCE /* EyelidsPairApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,7 +294,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B04F7D922BB30D57003E7DCE /* BTMan.swift in Sources */,
 				B04F7D732BB18536003E7DCE /* EyelidsPairTests.swift in Sources */,
+				B0B738122BB4B5CE00453E63 /* UIApplicationExtension.swift in Sources */,
+				B0B738152BB4B98100453E63 /* PeripheralView.swift in Sources */,
+				B04F7D8F2BB2E82B003E7DCE /* GATT.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,16 +451,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EyelidsPair/EyelidsPair.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"EyelidsPair/Preview Content\"";
+				DEVELOPMENT_TEAM = T57PLMJKEL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EyelidsPair/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "BLE dances with Eyelids";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -451,16 +484,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EyelidsPair/EyelidsPair.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"EyelidsPair/Preview Content\"";
+				DEVELOPMENT_TEAM = T57PLMJKEL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EyelidsPair/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "BLE dances with Eyelids";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
