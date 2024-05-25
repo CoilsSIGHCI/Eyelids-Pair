@@ -23,6 +23,17 @@
 		B0B738122BB4B5CE00453E63 /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B738102BB4B5CE00453E63 /* UIApplicationExtension.swift */; };
 		B0B738142BB4B98100453E63 /* PeripheralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B738132BB4B98100453E63 /* PeripheralView.swift */; };
 		B0B738152BB4B98100453E63 /* PeripheralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B738132BB4B98100453E63 /* PeripheralView.swift */; };
+		B0F756362C02733E00A8BC14 /* RealtimeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F756352C02733E00A8BC14 /* RealtimeGestureView.swift */; };
+		B0F756372C02733E00A8BC14 /* RealtimeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F756352C02733E00A8BC14 /* RealtimeGestureView.swift */; };
+		B0F756382C02733E00A8BC14 /* RealtimeGestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F756352C02733E00A8BC14 /* RealtimeGestureView.swift */; };
+		B0F756392C02773000A8BC14 /* GATT.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F7D8D2BB2E82B003E7DCE /* GATT.swift */; };
+		B0F7563A2C02773500A8BC14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F7D612BB18535003E7DCE /* ContentView.swift */; };
+		B0F7563B2C02773500A8BC14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F7D612BB18535003E7DCE /* ContentView.swift */; };
+		B0F7563C2C02773900A8BC14 /* PeripheralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B738132BB4B98100453E63 /* PeripheralView.swift */; };
+		B0F7563D2C02773B00A8BC14 /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B738102BB4B5CE00453E63 /* UIApplicationExtension.swift */; };
+		B0F7563E2C02775100A8BC14 /* BTMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F7D902BB30D57003E7DCE /* BTMan.swift */; };
+		B0F7563F2C02776300A8BC14 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F7D632BB18535003E7DCE /* Item.swift */; };
+		B0F756402C02776400A8BC14 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F7D632BB18535003E7DCE /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +71,7 @@
 		B04F7D902BB30D57003E7DCE /* BTMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTMan.swift; sourceTree = "<group>"; };
 		B0B738102BB4B5CE00453E63 /* UIApplicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
 		B0B738132BB4B98100453E63 /* PeripheralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralView.swift; sourceTree = "<group>"; };
+		B0F756352C02733E00A8BC14 /* RealtimeGestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeGestureView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +133,7 @@
 				B04F7D902BB30D57003E7DCE /* BTMan.swift */,
 				B0B738102BB4B5CE00453E63 /* UIApplicationExtension.swift */,
 				B0B738132BB4B98100453E63 /* PeripheralView.swift */,
+				B0F756352C02733E00A8BC14 /* RealtimeGestureView.swift */,
 			);
 			path = EyelidsPair;
 			sourceTree = "<group>";
@@ -281,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0B738112BB4B5CE00453E63 /* UIApplicationExtension.swift in Sources */,
+				B0F756362C02733E00A8BC14 /* RealtimeGestureView.swift in Sources */,
 				B04F7D622BB18535003E7DCE /* ContentView.swift in Sources */,
 				B04F7D912BB30D57003E7DCE /* BTMan.swift in Sources */,
 				B04F7D8E2BB2E82B003E7DCE /* GATT.swift in Sources */,
@@ -296,9 +310,12 @@
 			files = (
 				B04F7D922BB30D57003E7DCE /* BTMan.swift in Sources */,
 				B04F7D732BB18536003E7DCE /* EyelidsPairTests.swift in Sources */,
+				B0F7563A2C02773500A8BC14 /* ContentView.swift in Sources */,
 				B0B738122BB4B5CE00453E63 /* UIApplicationExtension.swift in Sources */,
+				B0F7563F2C02776300A8BC14 /* Item.swift in Sources */,
 				B0B738152BB4B98100453E63 /* PeripheralView.swift in Sources */,
 				B04F7D8F2BB2E82B003E7DCE /* GATT.swift in Sources */,
+				B0F756372C02733E00A8BC14 /* RealtimeGestureView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,8 +323,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0F7563E2C02775100A8BC14 /* BTMan.swift in Sources */,
+				B0F756402C02776400A8BC14 /* Item.swift in Sources */,
 				B04F7D7F2BB18536003E7DCE /* EyelidsPairUITestsLaunchTests.swift in Sources */,
+				B0F7563B2C02773500A8BC14 /* ContentView.swift in Sources */,
+				B0F7563C2C02773900A8BC14 /* PeripheralView.swift in Sources */,
+				B0F756392C02773000A8BC14 /* GATT.swift in Sources */,
 				B04F7D7D2BB18536003E7DCE /* EyelidsPairUITests.swift in Sources */,
+				B0F7563D2C02773B00A8BC14 /* UIApplicationExtension.swift in Sources */,
+				B0F756382C02733E00A8BC14 /* RealtimeGestureView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

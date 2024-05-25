@@ -34,30 +34,43 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack {
+        ZStack {
             BluetoothManagerView(viewModel: bluetoothViewModel, setController: { controller in underlyingController = controller }).frame(height: 0).onAppear {
                 bluetoothController = underlyingController
             }
             if let bluetoothController = bluetoothController {
                 NavigationStack {
+                    
                     List {
                         ForEach(bluetoothViewModel.discoveredPeripherals, id: \.identifier) { peripheral in
                             NavigationLink(value: peripheral) {
                                 Text(peripheral.name ?? "Unknown")
                             }
                         }
+                        if bluetoothViewModel.discoveredPeripherals.isEmpty {
+                            Text("No peripherals found, pull to refresh")
+                        }
                     }
-                    .navigationDestination(for: CBPeripheral.self) { peripheral in
-                            PeripheralView(peripheral: peripheral, viewController: bluetoothController, viewModel: bluetoothViewModel)
-                    }
-                    Button(bluetoothController.centralManager.isScanning ? "Scanning" : "Scan") {
+                    .refreshable {
                         print("Scanning for peripherals")
                         bluetoothViewModel.startScanning(viewController: bluetoothController)
+                        //                        wait till discovered
+                        var retries = 5
+                        while bluetoothViewModel.discoveredPeripherals.isEmpty && retries > 0 {
+                            sleep(1)
+                            retries -= 1
+                        }
+                        bluetoothViewModel.stopScanning(viewController: bluetoothController)
                     }
-                    .disabled(bluetoothController.centralManager.isScanning)
                     .navigationTitle(navigationTitle)
                     .navigationBarTitleDisplayMode(.inline)
+                    
+                    .navigationDestination(for: CBPeripheral.self) { peripheral in
+                        PeripheralView(peripheral: peripheral, viewController: bluetoothController, viewModel: bluetoothViewModel)
+                    }
                 }
+            } else {
+                Text("Bluetooth controller not found")
             }
         }
     }

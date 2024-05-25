@@ -9,6 +9,40 @@ import Foundation
 import CoreBluetooth
 import UIKit
 
+struct GestureEvent: Equatable {
+    var x: Float
+    var y: Float
+    var gesture: Int
+    var confidency: Float
+    
+    // optional initializer for RAW JSON data
+    init?(json: [String: Any]) {
+        guard let x = json["x"] as? Float,
+              let y = json["y"] as? Float,
+              let gesture = json["gesture"] as? Int,
+              let confidency = json["confidency"] as? Float else {
+            return nil
+        }
+        
+        self.x = x
+        self.y = y
+        self.gesture = gesture
+        self.confidency = confidency
+    }
+    
+    // provide a default initializer
+    init(x: Float, y: Float, gesture: Int, confidency: Float) {
+        self.x = x
+        self.y = y
+        self.gesture = gesture
+        self.confidency = confidency
+    }
+    
+    // override the Equatable protocol to leave out the confidency
+    static func == (lhs: GestureEvent, rhs: GestureEvent) -> Bool {
+        return lhs.x == rhs.x && lhs.y == rhs.y && lhs.gesture == rhs.gesture
+    }
+}
 
 class BluetoothViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     var viewModel: BluetoothViewModel!

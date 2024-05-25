@@ -5,14 +5,14 @@ struct BluetoothManagerView: UIViewControllerRepresentable {
     @ObservedObject var viewModel: BluetoothViewModel
     
     var setController: (BluetoothViewController) -> Void = { _ in }
-
+    
     func makeUIViewController(context: Context) -> BluetoothViewController {
         let viewController = BluetoothViewController()
         viewController.viewModel = viewModel
         setController(viewController)
         return viewController
     }
-
+    
     func updateUIViewController(_ uiViewController: BluetoothViewController, context: Context) {
         // No updates needed
     }
@@ -36,7 +36,7 @@ class BluetoothViewModel: ObservableObject {
         // Create an instance of BluetoothViewController
         let viewController = BluetoothViewController()
         viewController.viewModel = self
-
+        
         // Initialize the CBCentralManager in the BluetoothViewController
         viewController.viewDidLoad()
     }
