@@ -19,71 +19,59 @@ struct PeripheralView: View {
     
     var body: some View {
         VStack {
-            Text(peripheral.name ?? "Unknown peripheral")
+            Text("Current animation: " + (animationControlValue ?? "No animation state"))
                 .onAppear {
                     viewController.centralManager.connect(peripheral)
-                }
-            if viewModel.connectedPeripheral != nil {
-                Text("Connected")
-                    .onAppear {
-                        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
-                            fetchAnimationControlValue()
-                            fetchGesture()
-                        }
+                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+                        fetchValues()
                     }
-            } else {
-                Text("Not connected")
-            }
-            Text(animationControlValue ?? "No animation state")
-            Button("Fetch animation control value") {
-                fetchAnimationControlValue()
-            }
+                }
+            Spacer()
             RealtimeGestureView(gesture: $gesture)
-            if let characteristic = viewModel.animationControlcharacteristic {
-                Button("Send Strobe") {
-                    viewModel.connectedPeripheral?.writeValue(Data("STROBE".utf8), for: characteristic, type: .withResponse)
-                }
-                .buttonStyle(BorderedButtonStyle())
-                Button("Send HMove") {
-                    viewModel.connectedPeripheral?.writeValue(Data("SLIDE_RIGHT".utf8), for: characteristic, type: .withResponse)
-                }
-                .buttonStyle(BorderedButtonStyle())
-            }
-        }
-        .navigationTitle(peripheral.name ?? "Unknown peripheral")
-    }
-    
-    private func fetchAnimationControlValue() {
-        // Fetch animation control value from peripheral
-        viewModel.connectedPeripheral!.discoverServices(BluetoothViewModel.serviceUUIDs)
-        if let service = viewModel.connectedPeripheral!.services?.first {
-            viewModel.eyelidsService = service
-            viewModel.connectedPeripheral!.discoverCharacteristics([.init(string: "4116f8d2-9f66-4f58-a53d-fc7440e7c14e")], for: service)
-            if let validCharacteristic = viewModel.eyelidsService?.characteristics?.first {
-                viewModel.animationControlcharacteristic = validCharacteristic
-                viewModel.connectedPeripheral?.readValue(for: validCharacteristic)
-                if validCharacteristic.value != nil {
-                    animationControlValue = String(data: validCharacteristic.value!, encoding: .utf8)
+            Spacer()
+            HStack {
+                if let characteristic = viewModel.animationControlcharacteristic {
+                    Button("Send Strobe") {
+                        viewModel.connectedPeripheral?.writeValue(Data("STROBE".utf8), for: characteristic, type: .withResponse)
+                    }
+                    .buttonStyle(BorderedButtonStyle())
+                    Button("Send HMove Right") {
+                        viewModel.connectedPeripheral?.writeValue(Data("SLIDE_RIGHT".utf8), for: characteristic, type: .withResponse)
+                    }
+                    Button("Send HMove Left") {
+                        viewModel.connectedPeripheral?.writeValue(Data("SLIDE_LEFT".utf8), for: characteristic, type: .withResponse)
+                    }
+                    .buttonStyle(BorderedButtonStyle())
                 }
             }
+            Spacer()
         }
+        .navigationTitle((peripheral.name ?? "Unknown peripheral") + (viewModel.connectedPeripheral != nil ? " 🟢" : " 🔴"))
     }
     
-    private func fetchGesture() {
+    private func fetchValues() {
         // Fetch gesture from peripheral
         viewModel.connectedPeripheral!.discoverServices(BluetoothViewModel.serviceUUIDs)
         if let service = viewModel.connectedPeripheral!.services?.first {
             viewModel.eyelidsService = service
-            viewModel.connectedPeripheral!.discoverCharacteristics([.init(string: "49B0478D-C1B0-4255-BB55-1FD182638BBB")], for: service)
-            if let validCharacteristic = viewModel.eyelidsService?.characteristics?.first {
-                viewModel.animationControlcharacteristic = validCharacteristic
+            viewModel.connectedPeripheral!.discoverCharacteristics([BluetoothViewModel.gestureUUID, BluetoothViewModel.animationControlUUID], for: service)
+            if let validCharacteristic = viewModel.eyelidsService?.characteristics?.first(where: { $0.uuid == BluetoothViewModel.gestureUUID}) {
+                viewModel.gestureCharacteristic = validCharacteristic
                 viewModel.connectedPeripheral?.readValue(for: validCharacteristic)
-                if validCharacteristic.value != nil {
-                    if let jsonString = try? JSONSerialization.jsonObject(with: validCharacteristic.value!, options: []) as? [String: Any] {
+                if let value = validCharacteristic.value {
+                    if let jsonString = try? JSONSerialization.jsonObject(with: value, options: []) as? [String: Any] {
                         gesture = .init(json: jsonString)
                     } else {
+                        print("Gesture cancelled")
                         gesture = nil
                     }
+                }
+            }
+            if let validCharacteristic = viewModel.eyelidsService?.characteristics?.first(where: { $0.uuid == BluetoothViewModel.animationControlUUID}) {
+                viewModel.animationControlcharacteristic = validCharacteristic
+                viewModel.connectedPeripheral?.readValue(for: validCharacteristic)
+                if let value = validCharacteristic.value {
+                    animationControlValue = String(data: value, encoding: .utf8)
                 }
             }
         }

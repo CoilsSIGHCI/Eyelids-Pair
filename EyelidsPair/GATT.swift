@@ -9,40 +9,53 @@ import Foundation
 import CoreBluetooth
 import UIKit
 
+enum GestureDirectionType: String {
+    case upward = "upward"
+    case downward = "downward"
+    case leftward = "leftward"
+    case rightward = "rightward"
+    case forward = "forward"
+    case backward = "backward"
+    case rotationalClockwise = "rotation_clockwise"
+    case rotationalCounterclockwise = "rotation_counterclockwise"
+    case zoomIn = "zoom_in"
+    case zoomOut = "zoom_out"
+    case nonDirectional = "non_directional"
+}
+
 struct GestureEvent: Equatable {
-    var x: Float
-    var y: Float
     var gesture: Int
-    var confidency: Float
+    var direction: GestureDirectionType
+    var confidence: Float
     
     // optional initializer for RAW JSON data
     init?(json: [String: Any]) {
-        guard let x = json["x"] as? Float,
-              let y = json["y"] as? Float,
-              let gesture = json["gesture"] as? Int,
-              let confidency = json["confidency"] as? Float else {
+        guard let gesture = json["gesture"] as? Int,
+              let directionValue = json["direction"] as? String,
+              let direction = GestureDirectionType(rawValue: directionValue),
+              let confidence = json["confidence"] as? Float else {
+            print("Failed to parse JSON into GestureEvent")
             return nil
         }
         
-        self.x = x
-        self.y = y
         self.gesture = gesture
-        self.confidency = confidency
+        self.confidence = confidence
+        self.direction = direction
     }
     
     // provide a default initializer
-    init(x: Float, y: Float, gesture: Int, confidency: Float) {
-        self.x = x
-        self.y = y
+    init(gesture: Int, direction: GestureDirectionType, confidence: Float) {
         self.gesture = gesture
-        self.confidency = confidency
+        self.direction = direction
+        self.confidence = confidence
     }
     
-    // override the Equatable protocol to leave out the confidency
+    // override the Equatable protocol to leave out the confidence
     static func == (lhs: GestureEvent, rhs: GestureEvent) -> Bool {
-        return lhs.x == rhs.x && lhs.y == rhs.y && lhs.gesture == rhs.gesture
+        return lhs.gesture == rhs.gesture
     }
 }
+
 
 class BluetoothViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     var viewModel: BluetoothViewModel!
@@ -83,5 +96,17 @@ class BluetoothViewController: UIViewController, CBCentralManagerDelegate, CBPer
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
         self.viewModel.eyelidsService = service
     }
-    // Add other CBCentralManagerDelegate methods as needed
+    
+    func peripheral(_ peripheral: CBPeripheral, didModifyServices invalidatedServices: [CBService]) {
+        self.viewModel.connectedPeripheral = peripheral
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
+        if characteristic.uuid == BluetoothViewModel.animationControlUUID {
+            self.viewModel.animationControlcharacteristic = characteristic
+        }
+        if characteristic.uuid == BluetoothViewModel.gestureUUID {
+            self.viewModel.gestureCharacteristic = characteristic
+        }
+    }
 }

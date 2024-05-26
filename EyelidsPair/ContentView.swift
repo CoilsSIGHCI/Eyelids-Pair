@@ -55,12 +55,12 @@ struct ContentView: View {
                         print("Scanning for peripherals")
                         bluetoothViewModel.startScanning(viewController: bluetoothController)
                         //                        wait till discovered
-                        var retries = 5
-                        while bluetoothViewModel.discoveredPeripherals.isEmpty && retries > 0 {
-                            sleep(1)
-                            retries -= 1
-                        }
-                        bluetoothViewModel.stopScanning(viewController: bluetoothController)
+//                        var retries = 5
+//                        while bluetoothViewModel.discoveredPeripherals.isEmpty && retries > 0 {
+//                            sleep(1)
+//                            retries -= 1
+//                        }
+//                        bluetoothViewModel.stopScanning(viewController: bluetoothController)
                     }
                     .navigationTitle(navigationTitle)
                     .navigationBarTitleDisplayMode(.inline)

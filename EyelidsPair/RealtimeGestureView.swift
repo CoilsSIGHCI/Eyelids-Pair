@@ -12,39 +12,61 @@ struct RealtimeGestureView: View {
     
     let palette: [Color] = [.red, .green, .blue, .orange, .yellow, .purple]
     
-    // TODO: change this to the actual screen size of the gesture sensor
-    let gestureScreenSize = CGSize(width: 640, height: 480)
+    let gestureScreenSize = CGSize(width: 320, height: 240)
     
-    func dotPosition(gesture: GestureEvent, frameSize: CGSize) -> CGPoint {
-        let x = CGFloat(gesture.x) / gestureScreenSize.width * frameSize.width
-        let y = CGFloat(gesture.y) / gestureScreenSize.height * frameSize.height
-        return CGPoint(x: x, y: y)
+    // return sf symbol correspoding to the gesture's direction
+    var arrowSymbol: String {
+        switch gesture?.direction {
+        case .upward:
+            return "arrowshape.up.fill"
+        case .downward:
+            return "arrowshape.down.fill"
+        case .leftward:
+            return "arrowshape.left.fill"
+        case .rightward:
+            return "arrowshape.right.fill"
+        case .forward:
+            return "chevron.compact.up"
+        case .backward:
+            return "chevron.compact.down"
+        case .rotationalClockwise:
+            return "arrow.clockwise"
+        case .rotationalCounterclockwise:
+            return "arrow.counterclockwise"
+        case .zoomIn:
+            return "arrow.down.backward.and.arrow.up.forward"
+        case .zoomOut:
+            return "arrow.up.forward.and.arrow.down.backward"
+        default:
+            return "circle"
+        }
     }
     
+    
     var body: some View {
-        // render a canvas with a dot generated at x, y
-        GeometryReader { geometry in
             ZStack {
                 if let gesture = gesture {
-                    Circle()
-                        .fill(palette[gesture.gesture])
+                    Image(systemName: arrowSymbol)
+                        .scaleEffect(5)
+                        .foregroundStyle(palette[gesture.gesture % palette.count])
                         .frame(width: 30, height: 30)
-                        .position(dotPosition(gesture: gesture, frameSize: geometry.size))
                         .animation(.easeInOut(duration: 0.1), value: gesture)
-                        .shadow(color: palette[gesture.gesture].opacity(0.5), radius: 4)
+                        .shadow(color: palette[gesture.gesture % palette.count].opacity(0.5), radius: 4)
                 }
+                Spacer()
             }
+            // full width
+            .frame(width: 300, height: 200)
             .background {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.white.gradient)
             }
-            .aspectRatio(gestureScreenSize.width / gestureScreenSize.height, contentMode: .fit)
             .padding()
             .shadow(radius: 2)
-        }
     }
 }
 
 #Preview {
-    RealtimeGestureView(gesture: .constant(GestureEvent(x: 210, y: 130, gesture: 0, confidency: 0.8)))
+//    RealtimeGestureView(gesture: .constant(nil))
+    RealtimeGestureView(gesture: .constant(GestureEvent(gesture: 0, direction: .upward, confidence: 0.9)))
 }

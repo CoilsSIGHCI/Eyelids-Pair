@@ -24,8 +24,11 @@ class BluetoothViewModel: ObservableObject {
     @Published var connectedPeripheral: CBPeripheral?
     @Published var eyelidsService: CBService?
     @Published var animationControlcharacteristic: CBCharacteristic?
+    @Published var gestureCharacteristic: CBCharacteristic?
     
     static let serviceUUIDs = [CBUUID(string: "D57D86F6-E6F3-4BE4-A3D1-A71119D27AD3")]
+    static let animationControlUUID = CBUUID(string: "4116f8d2-9f66-4f58-a53d-fc7440e7c14e")
+    static let gestureUUID = CBUUID(string: "49B0478D-C1B0-4255-BB55-1FD182638BBB")
     
     func updateBluetoothState(_ newState: CBManagerState) {
         self.objectWillChange.send()
